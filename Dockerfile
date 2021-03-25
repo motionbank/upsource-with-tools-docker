@@ -1,4 +1,4 @@
-FROM jetbrains/upsource:@VERSION@
+FROM jetbrains/upsource:2020.1.1815
 
 USER root
 
@@ -20,17 +20,17 @@ RUN apt-get update && \
     apt-get install -y nodejs
 
 # install Android tools
-ENV ANDROID_HOME=/opt/android-sdk-linux
-ENV PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
-RUN mkdir ${ANDROID_HOME} && \
-    wget https://dl.google.com/android/repository/tools_r25.2.5-linux.zip -O android-sdk-tools.zip && \
-    unzip -q android-sdk-tools.zip -d ${ANDROID_HOME} && \
-    rm -f android-sdk-tools.zip && \
-    mkdir -p ${ANDROID_HOME}/licenses
-COPY ./android-licenses/*  ${ANDROID_HOME}/licenses/
-RUN ${ANDROID_HOME}/tools/bin/sdkmanager "platform-tools" && \
-# Repeat two lines below for each SDK supported in your projects
-    ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-26" && \
-    ${ANDROID_HOME}/tools/bin/sdkmanager "build-tools;26.0.0"
+#ENV ANDROID_HOME=/opt/android-sdk-linux
+#ENV PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
+#RUN mkdir ${ANDROID_HOME} && \
+#    wget https://dl.google.com/android/repository/tools_r25.2.5-linux.zip -O android-sdk-tools.zip && \
+#    unzip -q android-sdk-tools.zip -d ${ANDROID_HOME} && \
+#    rm -f android-sdk-tools.zip && \
+#    mkdir -p ${ANDROID_HOME}/licenses
+#COPY ./android-licenses/*  ${ANDROID_HOME}/licenses/
+#RUN ${ANDROID_HOME}/tools/bin/sdkmanager "platform-tools" && \
+## Repeat two lines below for each SDK supported in your projects
+#    ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-26" && \
+#    ${ANDROID_HOME}/tools/bin/sdkmanager "build-tools;26.0.0"
 
 USER jetbrains
